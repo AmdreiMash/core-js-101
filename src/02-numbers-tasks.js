@@ -105,10 +105,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  // eslint-disable-next-line no-mixed-operators
+  return Math.acos((x1 * x2 + y1 * y2) / Math.sqrt(x1 ** 2 + y1 ** 2)
+    // eslint-disable-next-line no-mixed-operators
+    * Math.sqrt(x2 ** 2 + y2 ** 2));
 }
-//! уебанская задача /
 
 /**
  * Returns a last digit of a integer number.
@@ -226,8 +228,10 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (value === null) return def;
+  // eslint-disable-next-line no-restricted-globals
+  return isNaN(value) ? def : value;
 }
 
 module.exports = {

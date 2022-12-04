@@ -486,8 +486,18 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const result = [];
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < n; i++) {
+    result.push([]);
+    // eslint-disable-next-line no-plusplus
+    for (let j = 0; j < n; j++) {
+      // eslint-disable-next-line no-unused-expressions
+      j === i ? result[i].push(1) : result[i].push(0);
+    }
+  }
+  return result;
 }
 
 /**

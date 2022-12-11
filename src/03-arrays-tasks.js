@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* ********************************************************************************************
  *                                                                                            *
  * Please read the following tutorial before implementing tasks:                               *
@@ -571,10 +572,20 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  return array.reduce((result, item) => {
+    const key = keySelector(item);
+    const value = valueSelector(item);
+    if (!result.has(key)) {
+      result.set(key, [value]);
+    } else {
+      const val = result.get(key);
+      val.push(value);
+      result.set(key, val);
+    }
+    return result;
+  }, new Map());
 }
-
 
 /**
  * Projects each element of the specified array to a sequence
@@ -589,8 +600,11 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map((child) => childrenSelector(child)).reduce((res, i) => {
+    res.push(...i);
+    return res;
+  });
 }
 
 
@@ -606,8 +620,12 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((res, i) => {
+    // eslint-disable-next-line no-param-reassign
+    res = res[i];
+    return res;
+  }, arr);
 }
 
 
@@ -629,8 +647,23 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const l = arr.length;
+  if (arr.length === 4) {
+    const res = arr.filter((e, i) => i >= l / 2);
+    const rigrt = arr.filter((e, i) => i < l / 2);
+    return [...res, ...rigrt];
+  }
+  if ((arr.length === 1 || arr.length === 2)) return arr.reverse();
+  const result = arr.slice(arr.length / 2 + 1);
+  console.log(result);
+  if (arr.length % 2 !== 0) {
+    result.push(arr[Math.floor(arr.length / 2)]);
+    arr.slice(0, arr.length / 2).map((i) => result.push(i));
+  } else {
+    arr.slice(0, arr.length / 2 - 1).map((i) => result.push(i));
+  }
+  return result;
 }
 
 

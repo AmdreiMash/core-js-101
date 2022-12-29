@@ -1,11 +1,7 @@
-function findFirstSingleChar(str) {
-  for (let i = 0; i < str.length; i++) {
-    if ((str.slice(i + 1).indexOf(str[i]) === -1) && (str.slice(0, i).indexOf(str[i]) === -1)) {
-      return str[i];
-    }
-  }
+function getDigitalRoot(num) {
+  const sum = String(num).split('').reduce((a, b) => +a + +b);
+  console.log(sum);
+  return String(sum).split('').reduce((s, digit) => +s + +digit);
 }
- console.log(findFirstSingleChar('abcdae'));
 
-console.log('34567'.slice(3 + 1));
-console.log('34567'.slice(0, 3));
+console.log(getDigitalRoot(1349));

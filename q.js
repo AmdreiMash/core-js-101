@@ -1,7 +1,7 @@
-function getDigitalRoot(num) {
-  const sum = String(num).split('').reduce((a, b) => +a + +b);
-  console.log(sum);
-  return String(sum).split('').reduce((s, digit) => +s + +digit);
+function memoize(func) {
+  const result = func();
+  return () => result;
 }
-
-console.log(getDigitalRoot(1349));
+const memoizer = memoize(() => Math.random());
+console.log(memoizer());
+console.log(memoizer());
